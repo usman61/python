@@ -1,3 +1,4 @@
+# Decorators:
 # The main use case of the symbol @ in Python are decorators. 
 # In Python, a decorator extends the functionality of an existing function or class.
 # Let understand decorators with help of a example given below.
