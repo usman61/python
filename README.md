@@ -1,3 +1,3 @@
 # python
-this repository contains basic concepts of programming related to python
+this repository contains solutions of basic programming problems particularly concepts related to python
 like decorators, tensors, numpy & many more.
