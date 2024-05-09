@@ -26,6 +26,6 @@ for i in arr:
         thrd_max = i
 
         
-print(max_num)
-print(sec_max)
-print(thrd_max)
+print(f"First Max: {max_num}")
+print(f"Sec Max:{sec_max}")
+print("Third Max:{thrd_max}")
