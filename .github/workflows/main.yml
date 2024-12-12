@@ -1,0 +1,35 @@
+name: Push-to-HyperStack
+
+# Trigger deployment only on push to master branch updated now.
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    name: Deploy to Hyper Stack on main branch push 
+    runs-on: ubuntu-latest
+    timeout-minutes: 60 # Increase this timeout value as needed
+    steps:
+      - name: Checkout the files
+        uses: actions/checkout@v2
+
+      - name: Deploy to Hyper Stack
+        uses: easingthemes/ssh-deploy@main
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.HYPER_SSH_KEY }}
+          REMOTE_HOST: ${{ secrets.HOST_DNS }}
+          REMOTE_USER: ${{ secrets.USERNAME }}
+          TARGET: ${{ secrets.TARGET_DIR }}
+
+      - name: SSH into Hyper Stack and Build Docker Image
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.HOST_DNS }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.HYPER_SSH_KEY }}
+          command_timeout: 40m
+          script: |
+            cd ${{ secrets.TARGET_DIR }}
+            sudo echo "hello" >> file.txt
