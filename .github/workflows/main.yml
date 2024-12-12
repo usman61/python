@@ -33,3 +33,13 @@ jobs:
           script: |
             cd ${{ secrets.TARGET_DIR }}
             sudo echo "hello" >> file.txt
+            sudo docker build -t dubbix-test:cicd .
+
+      - name: Run Docker Container on Hyper Stack
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.HOST_DNS }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            sudo docker run -d dubbix-test:cicd
